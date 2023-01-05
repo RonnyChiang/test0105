@@ -25,7 +25,27 @@ const model = {
         createdAt: true,
       },
     });
-    console.log(order);
+    return order;
+  },
+  getOrders: async () => {
+    const order = await prisma.orders.findMany({
+      where: {},
+      select: {
+        employee: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        product: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        createdAt: true,
+      },
+    });
     return order;
   },
 };
